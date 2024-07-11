@@ -1,0 +1,1 @@
+export * as pokemonActionsCreators from './pokemons.actions'

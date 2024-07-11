@@ -7,10 +7,14 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.0",
+    "axios": "^1.7.2",
     "next": "latest",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.2.0",
-    "react-redux": "^9.1.0"
+    "react-redux": "^9.1.2",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
     "@types/node": "20.2.5",
