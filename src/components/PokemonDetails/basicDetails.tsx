@@ -118,6 +118,7 @@ const BasicDetails: React.FC = () => {
             })
             return acc
         }, []))
+        setStatus('loaded')
         dispatch(getPokemonsData(response))
     }
 
@@ -145,15 +146,18 @@ const BasicDetails: React.FC = () => {
         setType(value)
     }
 
-    const filterPokemons = () => pokemonsData.filter((x: any) => {
-        const checks = [true]
-        if (generation) checks.push(x.generation.toLocaleLowerCase().includes(generation.toLocaleLowerCase()))
-        if (name) checks.push(x.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()) || x.evolutions.map((x: any) => x.name).join(', ').toLocaleLowerCase().includes(name.toLocaleLowerCase()))
+    const filterPokemons = () => {
+        const data = pokemonsData.filter((x: any) => {
+            const checks = [true]
+            if (generation) checks.push(x.generation.toLocaleLowerCase().includes(generation.toLocaleLowerCase()))
+            if (name) checks.push(x.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()) || x.evolutions.map((x: any) => x.name).join(', ').toLocaleLowerCase().includes(name.toLocaleLowerCase()))
 
-        if (type) checks.push(x.types.toLocaleLowerCase().includes(type.toLocaleLowerCase()))
-        if (id) checks.push(("" + x.id).toLocaleLowerCase().includes(id.toLocaleLowerCase()))
-        return checks.every(x => x)
-    })
+            if (type) checks.push(x.types.toLocaleLowerCase().includes(type.toLocaleLowerCase()))
+            if (id) checks.push(("" + x.id).toLocaleLowerCase().includes(id.toLocaleLowerCase()))
+            return checks.every(x => x)
+        })
+        return data
+    }
 
     const [open, setOpen] = React.useState(false);
     const [expanded, setExpanded] = React.useState(false);
@@ -161,6 +165,7 @@ const BasicDetails: React.FC = () => {
         setExpanded(!expanded);
     };
     const [selectedValue, setSelectedValue] = React.useState<any>({});
+    const [status, setStatus] = React.useState<'notLoaded' | 'loaded'>('notLoaded');
     const handleClickOpen = (x: any) => {
         setOpen(true)
         setSelectedValue(x)
@@ -245,7 +250,7 @@ const BasicDetails: React.FC = () => {
                 </DialogContent>
             </BootstrapDialog>
             {
-                (!pokemonsData && pokemonsData == undefined) ?
+                (status === 'notLoaded') ?
                     <>
                         <Loader />
                     </>
@@ -262,7 +267,7 @@ const BasicDetails: React.FC = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filterPokemons().map((x: any, index: number) => {
+                                {filterPokemons().length > 0 ? filterPokemons().map((x: any, index: number) => {
                                     return (
                                         <tr key={index}>
                                             <td>{x.id}</td>
@@ -276,7 +281,7 @@ const BasicDetails: React.FC = () => {
                                             </td>
                                         </tr>
                                     )
-                                })}
+                                }) : <tr><td colSpan={5}><center><em>Sin resultados</em></center></td></tr>}
                             </tbody>
                         </Table>
                     </>

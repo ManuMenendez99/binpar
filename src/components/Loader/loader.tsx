@@ -13,7 +13,7 @@ const Loader: React.FC = () => {
             <h3
                 className={styles.loadingText}
             >
-                Loading...
+                Cargando...
             </h3>
         </Container>
     )
