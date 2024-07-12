@@ -6,7 +6,6 @@ const initialState: any = {
 const pokemonsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case 'getPokemons': {
-            console.log('a')
             return {
                 ...state,
                 pokemonsData: [...state.pokemonsData, ...action.payload.pokemons].reduce((acc: any, key: any) => acc.map((x: any) => x.id).includes(key.id) ? acc : [...acc, key] ,[]).sort((a: any, b: any) => a.id - b.id),
