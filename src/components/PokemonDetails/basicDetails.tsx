@@ -256,14 +256,14 @@ const BasicDetails: React.FC = () => {
                     </>
                     :
                     <>
-                        <Table responsive>
+                        <Table responsive striped>
                             <thead>
                                 <tr>
-                                    <th><Form.Control size="sm" type="text" value={id} placeholder="Id." onChange={e => modifyId(e.target.value)}></Form.Control></th>
+                                    <th style={{width: '75px'}}><Form.Control size="sm" type="text" value={id} placeholder="Id." onChange={e => modifyId(e.target.value)}></Form.Control></th>
                                     <th><Form.Control size="sm" type="text" value={name} placeholder="Nombre" onChange={e => modifyName(e.target.value)}></Form.Control></th>
-                                    <th><Form.Control size="sm" type="text" value={generation} placeholder="Generación" onChange={e => modifyGeneration(e.target.value)}></Form.Control></th>
-                                    <th><Form.Control size="sm" type="text" value={type} placeholder="Tipos" onChange={e => modifyType(e.target.value)}></Form.Control></th>
-                                    <th></th>
+                                    <th style={{width: '20%'}}><Form.Control size="sm" type="text" value={generation} placeholder="Generación" onChange={e => modifyGeneration(e.target.value)}></Form.Control></th>
+                                    <th style={{width: '25%'}}><Form.Control size="sm" type="text" value={type} placeholder="Tipos" onChange={e => modifyType(e.target.value)}></Form.Control></th>
+                                    <th style={{width: '125px'}}></th>
                                 </tr>
                             </thead>
                             <tbody>
